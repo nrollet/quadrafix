@@ -59,7 +59,7 @@ else:
                             filetypes=[("IPL","*.ipl")])
 if not ipl:
     logging.warning("Annulation")
-    exit(0)
+    exit()
 
 fichier = ""
 if args["fichier"]:
