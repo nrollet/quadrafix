@@ -9,3 +9,10 @@ Le fichier CSV doit prendre le format suivant :
 journal; date; compte; libellé, débit; crédit; image ; pièce
 
 Détail du fichier CSV:
+journal = code journal (3 car.)
+date = jj/mm/aaaa
+compte = numéro compte (8 car. max)
+libellé = libellé (30 car. max)
+débit = montant débit
+crédit = montant crédit
+image = 
