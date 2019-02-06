@@ -10,9 +10,6 @@ from tkinter.filedialog import askopenfilename
 #     level=logging.DEBUG,
 #     format="%(module)s\t%(funcName)s\t\t%(levelname)s - %(message)s",
 # )
-logging.basicConfig(
-    level=logging.INFO, format="%(asctime)s %(module)s:%(funcName)s\t%(levelname)s -- %(message)s"
-)
 
 def progressbar(count, total):
     """
@@ -40,9 +37,17 @@ parser.add_argument(
     "-b", "--base", required=False, help="base dossier quadra (DC, DS201812, ...)"
 )
 parser.add_argument("-i", "--ipl", required=False, help="chemin fichier IPL")
+parser.add_argument("-v", "--verbose", action="count", help="mode debug")
 parser.add_argument("--version", action="version", version="%(prog)s 1.0")
 
 args = vars(parser.parse_args())
+
+if args["verbose"] > 0:
+    log_level = logging.DEBUG
+else : log_level = logging.INFO
+logging.basicConfig(
+    level=log_level, format="%(asctime)s %(module)s:%(funcName)s\t%(levelname)s -- %(message)s"
+)
 
 Tk().withdraw()
 
@@ -50,9 +55,11 @@ ipl = ""
 if args["ipl"]:
     ipl = args["ipl"]
 else:
-    while not ipl:
-        ipl = askopenfilename(title="Indiquez le fichier IPL",
-                             filetypes=[("IPL","*.ipl")])
+    ipl = askopenfilename(title="Indiquez le fichier IPL",
+                            filetypes=[("IPL","*.ipl")])
+if not ipl:
+    logging.warning("Annulation")
+    exit()
 
 fichier = ""
 if args["fichier"]:
