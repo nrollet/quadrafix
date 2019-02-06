@@ -46,8 +46,11 @@ if args["verbose"] > 0:
     log_level = logging.DEBUG
 else : log_level = logging.INFO
 logging.basicConfig(
-    level=log_level, format="%(asctime)s %(module)s:%(funcName)s\t%(levelname)s -- %(message)s"
-)
+    level=log_level, 
+    format="%(asctime)s %(module)s:%(funcName)s\t%(levelname)s -- %(message)s",
+    datefmt='%m-%d %H:%M',
+    filename='quadrafix.log',
+    filemode='w')
 
 Tk().withdraw()
 
