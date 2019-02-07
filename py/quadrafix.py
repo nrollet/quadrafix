@@ -42,7 +42,7 @@ parser.add_argument("--version", action="version", version="%(prog)s 1.0")
 
 args = vars(parser.parse_args())
 
-if args["verbose"] > 0:
+if args["verbose"]:
     log_level = logging.DEBUG
 else : log_level = logging.INFO
 logging.basicConfig(
@@ -117,6 +117,7 @@ i = 1
 
 logging.info("Mise à jour de la table Ecritures")
 for journal, date, compte, libelle, debit, credit, piece, image, centre in list:
+    logging.debug("insert n°{}".format(i))
     Q.insert_ecrit(
         journal=journal,
         date=date,
