@@ -24,8 +24,9 @@ class Prepare_Csv(object):
         COL_DEB = 4
         COL_CRE = 5
         COL_PCE = 6
-        COL_IMG = 7
+        COL_LET = 7
         COL_ANA = 8
+        COL_IMG = 9
 
         if len(self.lines) > 0:
             logging.info("{}, {} lignes".format(self.filepath, len(self.lines)))
@@ -66,6 +67,7 @@ class Prepare_Csv(object):
                 piece = ""
                 libelle = splited[COL_LIB][:30]
                 piece = splited[COL_PCE][:10]
+                lettre = ""
                 centre = ""
 
                 # nettoyage du libelle
@@ -107,8 +109,11 @@ class Prepare_Csv(object):
                 if re.match(r"\w{1,5}", splited[COL_ANA]):
                     centre = splited[COL_ANA]
 
+                if splited[COL_LET]:
+                    lettre = splited[COL_LET]
+
             self.data.append(
-                [journal, date, compte, libelle, debit, credit, piece, image, centre]
+                [journal, date, compte, libelle, debit, credit, piece, lettre, centre, image]
             )
         i += 1
         return True
