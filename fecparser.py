@@ -28,6 +28,8 @@ class fecparser(object):
             print("-" * 20)
             print(row)
 
+            ecr_dic = {}
+
             full_fec_row = {
                 "JournalCode": "",
                 "JournalLib": "",
@@ -51,7 +53,8 @@ class fecparser(object):
 
             for key in row.keys():
                 if key in full_fec_row:
-                    
+                    ecr_dic.update(key, row[key])
+
 
             # for key in row.keys():
             #     print(key, row[key])
