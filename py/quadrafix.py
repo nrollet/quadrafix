@@ -25,8 +25,8 @@ def progressbar(count, total):
 
 ########### CLI PARSER
 
-parser = argparse.ArgumentParser(description="Magic!!")
-parser.add_argument("-f", "--fichier", required=False, help="chemin du fichier")
+parser = argparse.ArgumentParser(description="Outil en ligne de commande pour l'import d'écritures dans Quadra Compta")
+parser.add_argument("-f", "--fichier", required=False, help="chemin du fichier CSV contant les écritures")
 parser.add_argument("-d", "--dossier", required=False, help="code dossier quadra")
 parser.add_argument(
     "-b", "--base", required=False, help="base dossier quadra (DC, DS201812, ...)"
