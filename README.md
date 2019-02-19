@@ -10,11 +10,13 @@ Pour les utilisateurs de Quadra Compta (Cegid), cet outil permet d'insérer dans
 Le fichier CSV doit prendre le format suivant :
 > journal; date; compte; libellé, débit; crédit; pièce; image ; centre
 
-*Détail du fichier CSV:
-*journal = code journal (3 car.)
-*date = jj/mm/aaaa
-*compte = numéro compte (8 car. max)
-*libellé = libellé (30 car. max)
-*débit = montant débit
-*crédit = montant crédit
-*piece = 
+* Détail du fichier CSV:
+* journal = code journal (3 car.)
+* date = jj/mm/aaaa
+* compte = numéro compte (8 car. max)
+* libellé = libellé (30 car. max)
+* débit = montant débit
+* crédit = montant crédit
+* piece = numéro de piece
+* image = fichier de la pièce comptable
+* centre = code analytique
