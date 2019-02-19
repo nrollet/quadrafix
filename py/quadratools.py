@@ -61,10 +61,11 @@ class QueryCompta(object):
 
         self.param_doss = {
             "raisonsoc": "Société1",
-            "exedebut": datetime(year=1890, month=1, day=1),
-            "exefin": datetime(year=1890, month=12, day=31),
-            "datevalid": "",
-            "dateclot": "",
+            "exedebut": datetime(year=1800, month=1, day=1),
+            "exefin": datetime(year=1800, month=12, day=31),
+            "datesortie" : datetime(year=1800, month=1, day=1),
+            "datevalid": datetime(year=1800, month=1, day=1),
+            "dateclot": datetime(year=1800, month=1, day=1),
             "collectfrn": "40100000",
             "collectcli": "41100000",
             "prefxfrn": "0",
@@ -110,13 +111,15 @@ class QueryCompta(object):
         sql = """
             SELECT
             CollectifFrnDefaut, CollectifClientDefaut,
-            CodifClasse0Seule, CodifClasse9Seule
+            CodifClasse0Seule, CodifClasse9Seule, DSDateSortie
             FROM Dossier2
         """
         self.cursor.execute(sql)
-        for colfrn, colcli, cl0, _ in self.cursor.fetchall():
+        for colfrn, colcli, cl0, _, datesortie in self.cursor.fetchall():
             self.param_doss["collectfrn"] = colfrn
             self.param_doss["collectcli"] = colcli
+            if datesortie:
+                self.param_doss["datesortie"] = datesortie
             if cl0 == "C":
                 self.param_doss["prefxfrn"] = "9"
                 self.param_doss["prefxcli"] = "0"
@@ -809,7 +812,11 @@ if __name__ == '__main__':
 
     o = QueryCompta()
     data = o.load_params(cpta)
-    pp.pprint(data["images"])
+    pp.pprint(data["datevalid"])
+    pp.pprint(data["dateclot"])
+    pp.pprint(data["datesortie"])
+
+    o.close()
 
     # compte = "60110000"
 
@@ -824,4 +831,3 @@ if __name__ == '__main__':
     # o.maj_central_all()
     # o.maj_central("AC", periode, 0)
 
-    o.close()
