@@ -1,5 +1,5 @@
 # quadrafix
-================
+
 Ligne de commande pour automatiser l'import d'écriture dans Quadra Compta.
 Cet outil vient compléter la fonction Import ASCII de quadra qui ne permet d'importer des écritures que via la GUI.
 Dans une configuration où l'on souhaite automatiser l'import d'écritures de bout en bout ce type d'outil est nécessaire.
@@ -13,13 +13,15 @@ Le programme suit les étapes suivantes :
 * mise à jour table Centralisateurs
 * mise à jour soldes dans la table Comptes
 
-__Attention__ : l'outil n'utilise pas le mécanisme de verrouillage QLocks (pipe). Ce sera à l'utilisateur de vérifier qu'il n'y aura pas de collision avec unsaisie en cours.
+Les écritures sont fournies sous la forme d'un fichier au format CSV
+
+__Attention__ : l'outil n'utilise pas le mécanisme de verrouillage QLocks (pipe). Ce sera à l'utilisateur de vérifier qu'il n'y aura pas de collision avec une saisie en cours.
 
 exemples :
-`python.exe quadrafix.py -i mono.ipl -b dc -d 752 -f .\samples\ecr-pj.csv`
-`quadrafix.exe -i quadra.ipl -d DOSSIER -b DC -f ecr.csv`
 
-Pour les utilisateurs de Quadra Compta (Cegid), cet outil permet d'insérer dans la table Ecritures des écritures issues d'un fichier CSV.
+`python.exe quadrafix.py -i mono.ipl -b dc -d 752 -f .\samples\ecr-pj.csv`
+
+`quadrafix.exe -i quadra.ipl -d DOSSIER -b DC -f ecr.csv`
 
 usage: quadrafix.py [-h] [-f FICHIER] [-d DOSSIER] [-b BASE] [-i IPL] [-v]
                     [--version]
