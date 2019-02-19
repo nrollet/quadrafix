@@ -3,7 +3,7 @@ ligne de commande pour automatiser l'import d'écriture dans Quadra Compta
 
 
 exemples :
-    python.exe quadrafix.py -i mono.ipl -b dc -d 752 -f .\samples\ecr-pj.csv
+`python.exe quadrafix.py -i mono.ipl -b dc -d 752 -f .\samples\ecr-pj.csv`
     quadrafix.exe -i quadra.ipl -d DOSSIER -b DC -f ecr.csv
 
 Pour les utilisateurs de Quadra Compta (Cegid), cet outil permet d'insérer dans la table Ecritures des écritures issues d'un fichier CSV.
