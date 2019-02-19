@@ -86,10 +86,10 @@ class QueryCompta(object):
             self.cursor = self.conx.cursor()
 
         except pyodbc.Error:
-            print("erreur requete base {} \n {}".format(
+            logging.error("erreur requete base {} \n {}".format(
                 self.chem_base, sys.exc_info()[1]))
         except:
-            print("erreur ouverture base {} \n {}".format(
+            logging.error("erreur ouverture base {} \n {}".format(
                 self.chem_base, sys.exc_info()[0]))
 
         # Paramètres table Dossier1
@@ -118,8 +118,7 @@ class QueryCompta(object):
         for colfrn, colcli, cl0, _, datesortie in self.cursor.fetchall():
             self.param_doss["collectfrn"] = colfrn
             self.param_doss["collectcli"] = colcli
-            if datesortie:
-                self.param_doss["datesortie"] = datesortie
+            self.param_doss["datesortie"] = datesortie
             if cl0 == "C":
                 self.param_doss["prefxfrn"] = "9"
                 self.param_doss["prefxcli"] = "0"
@@ -165,7 +164,9 @@ class QueryCompta(object):
         logging.info("Coll. fourn : {}".format(self.param_doss["collectfrn"]))
         logging.info("Préfixe fourn : {}".format(self.param_doss["prefxfrn"]))
         logging.info("Préfixe client : {}".format(self.param_doss["prefxcli"]))
-        logging.info("Comptes : {}".format(len(self.param_doss["plan"])))        
+        logging.info("Comptes : {}".format(len(self.param_doss["plan"])))
+        logging.info("Période cloturée : {}".format(self.param_doss["dateclot"].strftime("%d/%m/%Y")))  
+        logging.info("Date sortie : {}".format(self.param_doss["datesortie"].strftime("%d/%m/%Y")))  
 
         return self.param_doss
 
@@ -471,6 +472,11 @@ class QueryCompta(object):
         uid = self.get_last_uniq() + 1
         lfolio = self.get_last_lignefolio(journal, periode) + 10
 
+        # Vérif date sur période non cloturée
+        if periode <= self.param_doss["dateclot"]:
+            logging.error("ecriture sur periode cloturée : {}".format(periode))
+            return False
+
         # Vérif affect analytique
         if not centre:
             if compte in self.param_doss["affect"].keys():
@@ -592,7 +598,7 @@ class QueryCompta(object):
                     try:  
                         shutil.copy(source_image_path, dest_image_dir+"/"+image)  
                     except IOError as e:
-                        print ("Echec copie {}, {}".format(source_image_path, e))
+                        logging.error("Echec copie {}, {}".format(source_image_path, e))
 
             return True
 
@@ -816,6 +822,10 @@ if __name__ == '__main__':
     pp.pprint(data["dateclot"])
     pp.pprint(data["datesortie"])
 
+    periode = datetime(year=2018, month=1, day=1)
+    o.insert_ecrit("0YYYYYY7", "CA", "000", periode, "ABAQUE", 999.99, 0, "XXXXX", "", "", "")
+    o.insert_ecrit("60110000", "CA", "000", periode, "ABAQUE", 0, 999.99, "XXXXX", "", "", "")
+
     o.close()
 
     # compte = "60110000"
@@ -825,9 +835,6 @@ if __name__ == '__main__':
     # o.insert_compte("42501300")
     # pp.pprint(o.maj_solde_comptes())
     # print(o.get_last_lignefolio("AC", periode))
-    # periode = datetime(year=2018, month=12, day=1)
-    # o.insert_ecrit("0YYYYYY7", "CA", "000", periode, "ABAQUE", 999.99, 0, "XXXXX", "", "")
-    # o.insert_ecrit("60110000", "CA", "000", periode, "ABAQUE", 0, 999.99, "XXXXX", "", "")
     # o.maj_central_all()
     # o.maj_central("AC", periode, 0)
 

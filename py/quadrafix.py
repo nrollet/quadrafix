@@ -11,6 +11,7 @@ from tkinter.filedialog import askopenfilename
 #     format="%(module)s\t%(funcName)s\t\t%(levelname)s - %(message)s",
 # )
 
+
 def progressbar(count, total):
     """
     Pour l'affichage d'une barre de progression
@@ -28,6 +29,7 @@ def progressbar(count, total):
         end=tail,
     )
 
+
 ########### CLI PARSER
 
 parser = argparse.ArgumentParser(description="Magic!!")
@@ -44,13 +46,15 @@ args = vars(parser.parse_args())
 
 if args["verbose"]:
     log_level = logging.DEBUG
-else : log_level = logging.INFO
+else:
+    log_level = logging.INFO
 logging.basicConfig(
-    level=log_level, 
+    level=log_level,
     format="%(asctime)s %(module)s:%(funcName)s\t%(levelname)s -- %(message)s",
-    datefmt='%m-%d %H:%M',
-    filename='quadrafix.log',
-    filemode='w')
+    datefmt="%m-%d %H:%M",
+    filename="quadrafix.log",
+    filemode="w"
+)
 
 Tk().withdraw()
 
@@ -58,8 +62,7 @@ ipl = ""
 if args["ipl"]:
     ipl = args["ipl"]
 else:
-    ipl = askopenfilename(title="Indiquez le fichier IPL",
-                            filetypes=[("IPL","*.ipl")])
+    ipl = askopenfilename(title="Indiquez le fichier IPL", filetypes=[("IPL", "*.ipl")])
 if not ipl:
     logging.warning("Annulation")
     exit(1)
@@ -67,10 +70,12 @@ if not ipl:
 fichier = ""
 if args["fichier"]:
     fichier = args["fichier"]
-else: 
+else:
     while not fichier:
-        fichier = askopenfilename(title="Indiquez le fichier CSV",
-                              filetypes=[("TXT", "*.txt"), ("CSV","*.csv")])
+        fichier = askopenfilename(
+            title="Indiquez le fichier CSV",
+            filetypes=[("TXT", "*.txt"), ("CSV", "*.csv")],
+        )
 
 dossier = ""
 if args["dossier"]:
@@ -113,6 +118,12 @@ chemin_mdb = "{}{}/{}/qcompta.mdb".format(chemin_cpta, base, dossier)
 
 Q = QueryCompta()
 Q.load_params(chemin_mdb)
+
+if Q.param_doss["datesortie"]:
+    logging.error("Le dossier est sorti")
+    Q.close()
+    exit()
+
 i = 1
 
 logging.info("Mise à jour de la table Ecritures")
@@ -129,7 +140,7 @@ for journal, date, compte, libelle, debit, credit, piece, image, centre in list:
         image=image,
         centre=centre,
         folio="000",
-        image_root=chemin_piece
+        image_root=chemin_piece,
     )
     progressbar(i, len(list))
     i += 1

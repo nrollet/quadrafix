@@ -56,7 +56,6 @@ class Prepare_Csv(object):
             if len(splited):
 
                 splited.extend([""] * (9 - len(splited)))
-                print(splited)
 
                 journal = ""
                 date = ""
