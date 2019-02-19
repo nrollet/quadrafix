@@ -6,12 +6,6 @@ from quadratools import QueryCompta, quadra_env
 from tkinter import Tk
 from tkinter.filedialog import askopenfilename
 
-# logging.basicConfig(
-#     level=logging.DEBUG,
-#     format="%(module)s\t%(funcName)s\t\t%(levelname)s - %(message)s",
-# )
-
-
 def progressbar(count, total):
     """
     Pour l'affichage d'une barre de progression
@@ -28,7 +22,6 @@ def progressbar(count, total):
         ),
         end=tail,
     )
-
 
 ########### CLI PARSER
 
