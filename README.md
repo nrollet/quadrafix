@@ -15,14 +15,9 @@ Le programme suit les étapes suivantes :
 
 __Attention__ : l'outil n'utilise pas le mécanisme de verrouillage QLocks (pipe). Ce sera à l'utilisateur de vérifier qu'il n'y aura pas de collision avec unsaisie en cours.
 
-
 exemples :
 `python.exe quadrafix.py -i mono.ipl -b dc -d 752 -f .\samples\ecr-pj.csv`
-<<<<<<< HEAD
 `quadrafix.exe -i quadra.ipl -d DOSSIER -b DC -f ecr.csv`
-=======
-    quadrafix.exe -i quadra.ipl -d DOSSIER -b DC -f ecr.csv
->>>>>>> 758f822a9d6fcacbbc524ade1de034e7569885a9
 
 Pour les utilisateurs de Quadra Compta (Cegid), cet outil permet d'insérer dans la table Ecritures des écritures issues d'un fichier CSV.
 
