@@ -1,6 +1,7 @@
 # Custom
 *.ipl
 .vscode/
+samples/
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
