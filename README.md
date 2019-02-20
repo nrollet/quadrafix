@@ -12,6 +12,7 @@ Le programme suit les étapes suivantes :
     * copie de la pièce comptable dans le dossier \Images, si présente
 * mise à jour table Centralisateurs
 * mise à jour soldes dans la table Comptes
+* à chaque éxécution un fichier log est créé dans le répertoire courant
 
 Les écritures sont fournies sous la forme d'un fichier au format CSV
 
@@ -40,9 +41,7 @@ usage: quadrafix.exe [-h] [-f FICHIER] [-d DOSSIER] [-b BASE] [-i IPL] [-v]
 
 -v, --verbose         mode debug
 
---version             show program's version number and exit
-
-  Le fichier CSV doit prendre le format suivant :
+Le fichier CSV doit prendre le format suivant :
 > journal; date; compte; libellé, débit; crédit; pièce; image ; centre
 
 Détail du fichier CSV:
