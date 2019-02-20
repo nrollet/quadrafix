@@ -17,25 +17,30 @@ Les écritures sont fournies sous la forme d'un fichier au format CSV
 
 __Attention__ : l'outil n'utilise pas le mécanisme de verrouillage QLocks (pipe). Ce sera à l'utilisateur de vérifier qu'il n'y aura pas de collision avec une saisie en cours.
 
-exemples :
+Le fichier quadrafix.exe est téléchargeable dans le dossier /dist
 
-`python.exe quadrafix.py -i mono.ipl -b dc -d 752 -f .\samples\ecr-pj.csv`
+__Utilisation__
 
 `quadrafix.exe -i quadra.ipl -d DOSSIER -b DC -f ecr.csv`
 
-usage: quadrafix.py [-h] [-f FICHIER] [-d DOSSIER] [-b BASE] [-i IPL] [-v]
-                    [--version]
+usage: quadrafix.exe [-h] [-f FICHIER] [-d DOSSIER] [-b BASE] [-i IPL] [-v]
+                     [--version]
 
-optional arguments:
-  -h, --help            show this help message and exit
-  -f FICHIER, --fichier FICHIER
-                        chemin du fichier CSV contant les écritures
-  -d DOSSIER, --dossier DOSSIER
-                        code dossier quadra
-  -b BASE, --base BASE  base dossier quadra (DC, DS201812, ...)
-  -i IPL, --ipl IPL     chemin fichier IPL
-  -v, --verbose         mode debug
-  --version             show program's version number and exit
+-h, --help            show this help message and exit
+
+-f FICHIER, --fichier FICHIER
+                    chemin du fichier CSV contant les écritures
+
+-d DOSSIER, --dossier DOSSIER
+                    code dossier quadra
+
+-b BASE, --base BASE  base dossier quadra (DC, DS201812, ...)
+
+-i IPL, --ipl IPL     chemin fichier IPL
+
+-v, --verbose         mode debug
+
+--version             show program's version number and exit
 
   Le fichier CSV doit prendre le format suivant :
 > journal; date; compte; libellé, débit; crédit; pièce; image ; centre
@@ -50,3 +55,11 @@ Détail du fichier CSV:
 * piece = numéro de piece
 * image = fichier de la pièce comptable
 * centre = code analytique
+
+__Exemple__
+> AC;01/01/2019;0ZZZZZZZ;Achat PC;;999,99;"012345";infac.pdf
+> AC;01/01/2019;60110000;Achat PC;999,99;;"012345";infac.pdf;004
+
+__Prérequis__ : vous devrez installer le Microsoft Access Database Engine pour que Quadrafix puisse accéder à un qcompta.mdb.
+https://www.microsoft.com/fr-fr/download/details.aspx?id=13255
+

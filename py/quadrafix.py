@@ -112,10 +112,10 @@ chemin_mdb = "{}{}/{}/qcompta.mdb".format(chemin_cpta, base, dossier)
 Q = QueryCompta()
 Q.load_params(chemin_mdb)
 
-if Q.param_doss["datesortie"]:
-    logging.error("Le dossier est sorti")
-    Q.close()
-    exit()
+# if Q.param_doss["datesortie"]:
+#     logging.error("Le dossier est sorti")
+#     Q.close()
+#     exit()
 
 i = 1
 
