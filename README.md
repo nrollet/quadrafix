@@ -58,8 +58,10 @@ Détail du fichier CSV:
 
 __Exemple__
 > AC;01/01/2019;0ZZZZZZZ;Achat PC;;999,99;"012345";infac.pdf
+
 > AC;01/01/2019;60110000;Achat PC;999,99;;"012345";infac.pdf;004
 
-__Prérequis__ : vous devrez installer le Microsoft Access Database Engine pour que Quadrafix puisse accéder à un qcompta.mdb.
+__Prérequis__ 
+Vous devrez installer le Microsoft Access Database Engine pour que Quadrafix puisse accéder à un qcompta.mdb.
 https://www.microsoft.com/fr-fr/download/details.aspx?id=13255
 
